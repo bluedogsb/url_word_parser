@@ -7,50 +7,93 @@ class UrlWords
   attr_accessor :all_words
   attr_accessor :all_words_hash
   attr_accessor :words_count_array
+  attr_accessor :top_25
 
   def initialize(url: nil)
     @url = url
   end
 
   def run
-    get_url
-    get_text
-    collect_words
-    get_top_25
+    success = true
+    
+    unless get_url == false 
+      puts "got url and text squeezed"
+    else
+      return "get_url found no body to parse"
+    end
+
+    unless get_text == false 
+      puts "got text"
+    else
+      return "get_text found no text to squeeze"
+    end
+    
+    unless collect_words == false
+      puts "collected words"
+    else
+      return "collect_words found no words"
+    end
+
+    unless get_top_25 == false
+      puts "got top 25 words"
+      return @top_25
+    else
+      return "get_top_25 found no words"
+    end
   end
 
   def get_url
     @doc = Nokogiri::HTML(URI.open(@url))
     @doc.css('script, link').each { |node| node.remove }
     @doc.css('body').text.squeeze(" \n")
-    return "text squeezed"
+    if @doc != nil
+      true
+    else
+      false
+    end
   end
 
   def get_text
     @text = @doc.css('body').text.squeeze(" \n")
-    return "got text"
+    if @text != nil
+      true
+    else
+      false
+    end
   end
 
   def collect_words
     @all_words_hash = {}
+    @words_count_array = []
+    temp_text = @text
 
     # remove carriage returns and tabs
-    @text = @text.gsub!(/\n /, " ")
-    @text = @text.gsub!(/\t/, " ")
-    @text = @text.gsub!(/\n /, " ")
+    begin
+      temp_text = temp_text.gsub!(/\n /, " ")
+      temp_text = temp_text.gsub!(/\t/, " ")
+      temp_text = temp_text.gsub!(/\n /, " ")
+    rescue
+      temp_text = @text
+      puts "gsub hard return and tabs failed"
+    end
 
     # remove spaces
-    @text = @text.gsub!(/\s\s/, " ") 
-    @text = @text.gsub!(/\s\s/, " ") 
-    @text = @text.gsub!(/\s\s/, " ") 
-    @text = @text.gsub!(/\s\s/, " ") 
-    @text = @text.gsub!(/\s\s/, " ") 
-    @text = @text.gsub!(/\s\s/, " ") 
-    @text = @text.gsub!(/â/, "")
+    begin 
+      temp_text = temp_text.gsub!(/\s\s/, " ") 
+      temp_text = temp_text.gsub!(/\s\s/, " ") 
+      temp_text = temp_text.gsub!(/\s\s/, " ") 
+      temp_text = temp_text.gsub!(/\s\s/, " ") 
+      temp_text = temp_text.gsub!(/\s\s/, " ") 
+      temp_text = temp_text.gsub!(/\s\s/, " ") 
+      temp_text = temp_text.gsub!(/â/, "")
+    rescue 
+      temp_text = @text
+      puts "gsub whitespace failed"
+    end
     # puts @text
 
     # get words, split on spaces
-    @all_words = @text.split(" ")
+    @all_words = temp_text.split(" ")
     
     # build hash with words and counts
     @all_words.each do |word|
@@ -67,12 +110,24 @@ class UrlWords
     # sort hash into array
     @words_count_array = @all_words_hash.sort_by {|_key, value| value}
 
+    if @words_count_array != []
+      true
+    else
+      false
+    end
   end
 
   def get_top_25
     len = @words_count_array.length
     first = len - 25
-    top_25 = @words_count_array.slice(first, 25)
+    @top_25 = []
+    @top_25 = @words_count_array.slice(first, 25)
+
+    if @top_25 != []
+      true
+    else
+      false
+    end
   end
 
 end

@@ -1,5 +1,15 @@
 rake console
 
+uw = UrlWords.new(url: "https://medium.com/tech-batoora/xml-50488ec69b20")
+uw.get_url
+uw.get_text
+uw.collect_words
+
+uw.all_words_hash
+uw.words_count_array
+uw.get_top_25
+
+
 uw = UrlWords.new(url: "https://cnn.com")
 uw.get_url
 uw.get_text
