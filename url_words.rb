@@ -8,34 +8,33 @@ class UrlWords
   attr_accessor :all_words_hash
   attr_accessor :words_count_array
   attr_accessor :top_25
+  attr_accessor :do_puts
 
-  def initialize(url: nil)
+  def initialize(url: nil, do_puts: false)
     @url = url
   end
 
-  def run
-    success = true
-    
+  def run    
     unless get_url == false 
-      puts "got url and text squeezed"
+      puts "got url and text squeezed" if do_puts
     else
       return "get_url found no body to parse"
     end
 
     unless get_text == false 
-      puts "got text"
+      puts "got text" if do_puts
     else
       return "get_text found no text to squeeze"
     end
     
     unless collect_words == false
-      puts "collected words"
+      puts "collected words" if do_puts
     else
       return "collect_words found no words"
     end
 
     unless get_top_25 == false
-      puts "got top 25 words"
+      puts "got top 25 words" if do_puts
       return @top_25
     else
       return "get_top_25 found no words"
@@ -74,7 +73,7 @@ class UrlWords
       temp_text = temp_text.gsub!(/\n /, " ")
     rescue
       temp_text = @text
-      puts "gsub hard return and tabs failed"
+      puts "gsub hard return and tabs failed" if do_puts
     end
 
     # remove spaces
@@ -88,7 +87,7 @@ class UrlWords
       temp_text = temp_text.gsub!(/â/, "")
     rescue 
       temp_text = @text
-      puts "gsub whitespace failed"
+      puts "gsub whitespace failed" if do_puts
     end
     # puts @text
 
