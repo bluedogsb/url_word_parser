@@ -6,6 +6,7 @@ require_relative '../../url_words'
 class TestUrlWords < Minitest::Test
 
   def test_url_words_test
+    ## Url content saved as of 2024/04/04 3:45pm PST from CNN
     url = "https://www.cnn.com/2024/02/23/tech/att-outage-customer-service/index.html"
     uw = UrlWords.new(url: url)
     expected = [["2024", 8],
