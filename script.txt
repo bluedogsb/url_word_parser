@@ -1,0 +1,19 @@
+rake console
+
+uw = UrlWords.new(url: "https://cnn.com")
+uw.get_url
+uw.get_text
+uw.collect_words
+
+uw.all_words_hash
+uw.words_count_array
+uw.get_top_25
+
+uw = UrlWords.new(url: "https://www.cnn.com/business/tech")
+uw.get_url
+uw.get_text
+uw.collect_words
+
+uw.all_words_hash
+uw.words_count_array
+uw.get_top_25
