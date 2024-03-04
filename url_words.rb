@@ -12,6 +12,13 @@ class UrlWords
     @url = url
   end
 
+  def run
+    get_url
+    get_text
+    collect_words
+    get_top_25
+  end
+
   def get_url
     @doc = Nokogiri::HTML(URI.open(@url))
     @doc.css('script, link').each { |node| node.remove }
@@ -42,7 +49,7 @@ class UrlWords
     @text = @text.gsub!(/\s\s/, " ") 
     @text = @text.gsub!(/\s\s/, " ") 
     @text = @text.gsub!(/â/, "")
-    puts @text
+    # puts @text
 
     # get words, split on spaces
     @all_words = @text.split(" ")

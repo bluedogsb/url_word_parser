@@ -5,8 +5,9 @@
 
 ## Usage
 
-- run `./bin/console`:
+- run `rake console`:
 
 In Pry console:
 
-- `uw = UrlWords.new()`
+- `uw = UrlWords.new(url: "https://cnn.com")`
+- `uw.run`
