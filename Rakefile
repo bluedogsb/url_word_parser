@@ -6,7 +6,6 @@ task :default => :test
  
 task :console do
   require 'pry'
-  require 'httparty'
   require 'nokogiri'
   require 'open-uri'
  
