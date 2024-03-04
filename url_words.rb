@@ -22,8 +22,6 @@ class UrlWords
   def get_url
     @doc = Nokogiri::HTML(URI.open(@url))
     @doc.css('script, link').each { |node| node.remove }
-
-    # puts @doc
     @doc.css('body').text.squeeze(" \n")
     return "text squeezed"
   end
