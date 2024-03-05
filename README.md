@@ -18,3 +18,8 @@ In Pry console:
 - `url = "https://www.cnn.com/2024/02/23/tech/att-outage-customer-service/index.html"`
 - `uw = UrlWords.new(url: url, do_puts: true)`
 - `uw.run`
+
+## Tests
+
+- minitest
+- from terminal run: `rake test`
