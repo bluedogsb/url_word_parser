@@ -8,6 +8,7 @@ task :console do
   require 'pry'
   require 'nokogiri'
   require 'open-uri'
+  require 'openssl'
  
   require_relative './url_words.rb'
  

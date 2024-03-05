@@ -12,29 +12,30 @@ class UrlWords
 
   def initialize(url: nil, do_puts: false)
     @url = url
+    @do_puts = do_puts
   end
 
   def run    
     unless get_url == false 
-      puts "got url and text squeezed" if do_puts
+      puts "got url and text squeezed" if @do_puts
     else
       return "get_url found no body to parse"
     end
 
     unless get_text == false 
-      puts "got text" if do_puts
+      puts "got text" if @do_puts
     else
       return "get_text found no text to squeeze"
     end
     
     unless collect_words == false
-      puts "collected words" if do_puts
+      puts "collected words" if @do_puts
     else
       return "collect_words found no words"
     end
 
     unless get_top_25 == false
-      puts "got top 25 words" if do_puts
+      puts "got top 25 words" if @do_puts
       return @top_25
     else
       return "get_top_25 found no words"
@@ -73,7 +74,7 @@ class UrlWords
       temp_text = temp_text.gsub!(/\n /, " ")
     rescue
       temp_text = @text
-      puts "gsub hard return and tabs failed" if do_puts
+      puts "gsub hard return and tabs failed" if @do_puts
     end
 
     # remove spaces
@@ -87,12 +88,16 @@ class UrlWords
       temp_text = temp_text.gsub!(/â/, "")
     rescue 
       temp_text = @text
-      puts "gsub whitespace failed" if do_puts
+      puts "gsub whitespace failed" if @do_puts
     end
-    # puts @text
+    # puts @text if @do_puts
 
     # get words, split on spaces
-    @all_words = temp_text.split(" ")
+    begin 
+      @all_words = temp_text.split(" ")
+    rescue
+      @all_words = @text.split(" ")
+    end
     
     # build hash with words and counts
     @all_words.each do |word|
