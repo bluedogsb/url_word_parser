@@ -67,7 +67,7 @@ class UrlWords
     @words_count_array = []
     temp_text = @text
 
-    # remove carriage returns and tabs
+    ## remove carriage returns and tabs
     begin
       temp_text = temp_text.gsub!(/\n /, " ")
       temp_text = temp_text.gsub!(/\t/, " ")
@@ -77,7 +77,7 @@ class UrlWords
       puts "gsub hard return and tabs failed" if @do_puts
     end
 
-    # remove spaces
+    ## remove spaces
     begin 
       temp_text = temp_text.gsub!(/\s\s/, " ") 
       temp_text = temp_text.gsub!(/\s\s/, " ") 
@@ -90,20 +90,20 @@ class UrlWords
       temp_text = @text
       puts "gsub whitespace failed" if @do_puts
     end
-    # puts @text if @do_puts
 
-    # get words, split on spaces
+    ## get words, split on spaces
     begin 
       @all_words = temp_text.split(" ")
     rescue
+      # puts @text if @do_puts
       @all_words = @text.split(" ")
     end
     
-    # build hash with words and counts
+    ## build hash with words and counts
     @all_words.each do |word|
-      # remove non-ascii chars
+      ## remove non-ascii chars
       word = word.chars.select(&:ascii_only?).join
-      # build hash count
+      ## build hash count
       if @all_words_hash[word] == nil
         @all_words_hash[word]
         @all_words_hash[word] = 0
@@ -111,7 +111,7 @@ class UrlWords
       @all_words_hash[word] += 1
     end
 
-    # sort hash into array
+    ## sort hash into array
     @words_count_array = @all_words_hash.sort_by {|_key, value| value}
 
     if @words_count_array != []

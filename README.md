@@ -5,16 +5,16 @@
 
 ## Usage
 
-- run `rake console`:
+- from terminal run: `rake console` to open Pry console
 
 In Pry console:
 
 - `url = "https://www.cnn.com/2024/02/23/tech/att-outage-customer-service/index.html"`
-- `uw = UrlWords.new(url: "https://cnn.com")`
+- `uw = UrlWords.new(url: url)`
 - `uw.run`
 
 * To enable puts output, set do_puts: true
 
 - `url = "https://www.cnn.com/2024/02/23/tech/att-outage-customer-service/index.html"`
-- `uw = UrlWords.new(url: "https://cnn.com", do_puts: true)`
+- `uw = UrlWords.new(url: url, do_puts: true)`
 - `uw.run`
