@@ -77,7 +77,7 @@ class UrlWords
       puts "gsub hard return and tabs failed" if @do_puts
     end
 
-    ## remove spaces
+    ## remove spaces, multiple time in case of large gaps
     begin 
       temp_text = temp_text.gsub!(/\s\s/, " ") 
       temp_text = temp_text.gsub!(/\s\s/, " ") 
