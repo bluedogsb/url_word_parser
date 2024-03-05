@@ -15,7 +15,7 @@ In Pry console:
 
 * To enable puts output, set do_puts: true
 
-- `url = "https://www.cnn.com/2024/02/23/tech/att-outage-customer-service/index.html"`
+- `url = "https://variety.com/2024/film/news/dune-2-box-office-analysis-opening-weekend-timothee-chalamet-1235928762/"`
 - `uw = UrlWords.new(url: url, do_puts: true)`
 - `uw.run`
 
